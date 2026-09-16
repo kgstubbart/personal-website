@@ -1,0 +1,45 @@
+.row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent-2);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  padding-bottom: 0.35rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.arrow {
+  width: 15px;
+  height: 15px;
+  transition: transform var(--transition-fast);
+}
+
+.link:hover .arrow {
+  transform: translateX(3px);
+}

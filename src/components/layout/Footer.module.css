@@ -1,0 +1,47 @@
+.footer {
+  border-top: 1px solid var(--surface-border);
+  margin-top: auto;
+  padding-block: 2.25rem;
+  background: var(--bg);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.note {
+  font-size: 0.88rem;
+  color: var(--text-faint);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}

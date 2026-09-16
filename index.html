@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Kason Stubbart · Software Engineer</title>
+    <meta
+      name="description"
+      content="Kason Stubbart is a Computer Science student at Brigham Young University building full-stack software, research tooling, and analytical projects."
+    />
+    <meta name="theme-color" content="#05060b" />
+    <link rel="canonical" href="https://kgstubbart.dev/" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kason Stubbart" />
+    <meta property="og:title" content="Kason Stubbart · Software Engineer" />
+    <meta
+      property="og:description"
+      content="Kason Stubbart is a Computer Science student at Brigham Young University building full-stack software, research tooling, and analytical projects."
+    />
+    <meta property="og:url" content="https://kgstubbart.dev/" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Restores the real path after the GitHub Pages 404.html SPA redirect.
+      // See public/404.html and https://github.com/rafgraph/spa-github-pages
+      (function () {
+        var search = window.location.search;
+        if (search[1] === "/") {
+          var decoded = search
+            .slice(1)
+            .split("&")
+            .map(function (segment) {
+              return segment.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            "",
+            window.location.pathname.slice(0, -1) + decoded + window.location.hash,
+          );
+        }
+      })();
+    </script>
+
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("kgstubbart-theme");
+          var theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

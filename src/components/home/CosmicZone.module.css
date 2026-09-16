@@ -1,0 +1,14 @@
+.zone {
+  position: relative;
+  isolation: isolate;
+  color: #f2f3fc;
+}
+
+[data-theme="light"] .zone {
+  color: #f4f5ff;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}

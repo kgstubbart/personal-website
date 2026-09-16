@@ -1,0 +1,36 @@
+.wrap {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-block: 5rem 6rem;
+  gap: 1rem;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-2);
+  letter-spacing: 0.04em;
+}
+
+.title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+.body {
+  color: var(--text-muted);
+  max-width: 44ch;
+}
+
+.link {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.link:hover {
+  text-decoration: underline;
+}

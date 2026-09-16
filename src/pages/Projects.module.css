@@ -1,0 +1,89 @@
+.section {
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card {
+  padding: 2rem;
+}
+
+@media (max-width: 780px) {
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-size: 1.35rem;
+}
+
+.headerMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dates {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.description {
+  margin-top: 0.85rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 68ch;
+}
+
+.role {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.tagRow {
+  margin-top: 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.footerNote {
+  margin-top: 2.5rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.footerNote a {
+  font-weight: 600;
+}
