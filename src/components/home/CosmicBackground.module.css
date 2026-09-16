@@ -6,18 +6,53 @@
   background: radial-gradient(ellipse 120% 60% at 50% -10%, #14163a 0%, #05060b 55%, #05060b 100%);
 }
 
-/* Light mode isn't a paled-out night sky — it's an up-close lunar
-   surface in bright, raking sunlight: craters, dust, and a soft vignette
-   like a macro shot of the ground underfoot. */
+/* Light mode isn't a paled-out night sky — it's a real photograph of the
+   lunar surface underfoot (Apollo 15, EVA Station 9), not a procedural
+   stand-in. Solid fallback color matches the photo while it loads. */
 [data-theme="light"] .cosmos {
-  background: radial-gradient(ellipse 140% 90% at 50% 50%, rgba(0, 0, 0, 0) 55%, rgba(28, 24, 18, 0.22) 100%),
-    linear-gradient(135deg, #f1ecdf 0%, #d3cab8 42%, #a89d8b 78%, #8c8271 100%);
+  background: #c7bdab;
 }
 
 .canvas {
   position: absolute;
   inset: 0;
   display: block;
+}
+
+.moonSurface {
+  position: absolute;
+  inset: 0;
+  background-image: url("../../assets/moon-surface.jpg");
+  background-size: cover;
+  /* Bias the crop toward the rocky foreground and away from the dark
+     sky band at the top of the frame. */
+  background-position: center 82%;
+  background-repeat: no-repeat;
+}
+
+.moonWash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 13, 10, 0.32) 0%,
+    rgba(15, 13, 10, 0.05) 26%,
+    rgba(15, 13, 10, 0) 48%
+  );
+  pointer-events: none;
+}
+
+.credit {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(30, 26, 20, 0.55);
+  background: rgba(255, 252, 244, 0.45);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  pointer-events: none;
 }
 
 .vignette {

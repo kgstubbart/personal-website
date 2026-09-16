@@ -2,6 +2,30 @@
   padding-block: clamp(4.5rem, 12vw, 8rem) clamp(3rem, 8vw, 5rem);
 }
 
+/* Transparent in dark mode (the starfield is calm enough for text to sit
+   directly on it); a frosted glass card in light mode, where text needs
+   real contrast against a busy photo. Negative margins match the
+   container's own gutter so the panel never overflows it. */
+.textPanel {
+  display: inline-block;
+  max-width: 100%;
+  padding: 2rem 1.5rem;
+  margin: -2rem -1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--cosmic-panel-bg);
+  border: 1px solid var(--cosmic-panel-border);
+  backdrop-filter: var(--cosmic-panel-blur);
+  -webkit-backdrop-filter: var(--cosmic-panel-blur);
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+@media (max-width: 640px) {
+  .textPanel {
+    padding: 1.5rem 1.25rem;
+    margin: -1.5rem -1.25rem;
+  }
+}
+
 .kicker {
   display: inline-flex;
   align-items: center;

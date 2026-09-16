@@ -16,6 +16,10 @@
   --cosmic-card-bg-hover: rgba(255, 255, 255, 0.09);
   --cosmic-card-border-hover: rgba(255, 255, 255, 0.24);
 
+  --cosmic-panel-bg: transparent;
+  --cosmic-panel-border: transparent;
+  --cosmic-panel-blur: none;
+
   --cosmic-icon-bg: rgba(154, 163, 255, 0.16);
   --cosmic-icon-text: #b9c0ff;
 
@@ -44,10 +48,17 @@
   --cosmic-pill-border: rgba(67, 56, 202, 0.22);
   --cosmic-pill-text: #4338ca;
 
-  --cosmic-card-bg: rgba(255, 255, 255, 0.5);
+  --cosmic-card-bg: rgba(255, 255, 255, 0.6);
   --cosmic-card-border: rgba(30, 33, 56, 0.1);
-  --cosmic-card-bg-hover: rgba(255, 255, 255, 0.78);
+  --cosmic-card-bg-hover: rgba(255, 255, 255, 0.82);
   --cosmic-card-border-hover: rgba(67, 56, 202, 0.3);
+
+  /* The hero text sits directly over a real photo, not a gentle gradient,
+     so it needs a frosted panel behind it for contrast — the same glass
+     treatment as the info cards, just larger. */
+  --cosmic-panel-bg: rgba(255, 253, 247, 0.62);
+  --cosmic-panel-border: rgba(30, 33, 56, 0.08);
+  --cosmic-panel-blur: blur(28px);
 
   --cosmic-icon-bg: rgba(67, 56, 202, 0.1);
   --cosmic-icon-text: #4338ca;
