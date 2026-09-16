@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useTheme } from "../../theme/ThemeContext";
 import styles from "./CosmicBackground.module.css";
 
-type Star = {
+type Particle = {
   x: number;
   y: number;
   radius: number;
@@ -13,37 +13,44 @@ type Star = {
   tint: string;
 };
 
-// Dark mode reads as a real night sky: dense, with a little color variety.
+// Dark mode reads as a real night sky: dense, with a little color variety,
+// drifting gently downward.
 const DARK_DENSITY = 0.00034;
-const DARK_MAX_STARS = 780;
+const DARK_MAX_PARTICLES = 780;
 const DARK_TINTS = ["255,255,255", "255,255,255", "255,255,255", "214,224,255", "255,238,214"];
 
-// Light mode reads as first light — a handful of stars still visible, not a field.
-const LIGHT_DENSITY = 0.00009;
-const LIGHT_MAX_STARS = 190;
-const LIGHT_TINTS = ["64,70,110"];
+// Light mode swaps stars for sunlit dust motes rising slowly through the
+// scene, like light catching particles in the air.
+const LIGHT_DENSITY = 0.00006;
+const LIGHT_MAX_PARTICLES = 110;
+const LIGHT_TINTS = ["255,236,196", "255,255,255", "255,224,168"];
 
-function createStars(width: number, height: number, theme: "light" | "dark"): Star[] {
+function createParticles(width: number, height: number, theme: "light" | "dark"): Particle[] {
   const density = theme === "dark" ? DARK_DENSITY : LIGHT_DENSITY;
-  const maxStars = theme === "dark" ? DARK_MAX_STARS : LIGHT_MAX_STARS;
+  const maxParticles = theme === "dark" ? DARK_MAX_PARTICLES : LIGHT_MAX_PARTICLES;
   const tints = theme === "dark" ? DARK_TINTS : LIGHT_TINTS;
-  const count = Math.min(maxStars, Math.round(width * height * density));
-  const stars: Star[] = [];
+  const count = Math.min(maxParticles, Math.round(width * height * density));
+  const particles: Particle[] = [];
   for (let i = 0; i < count; i++) {
     const big = Math.random() > 0.88;
-    stars.push({
+    particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius: big ? Math.random() * 1.1 + 1 : Math.random() * 0.9 + 0.2,
+      radius:
+        theme === "dark"
+          ? big
+            ? Math.random() * 1.1 + 1
+            : Math.random() * 0.9 + 0.2
+          : Math.random() * 1.6 + 0.6,
       baseAlpha:
-        theme === "dark" ? Math.random() * 0.6 + 0.28 : Math.random() * 0.32 + 0.12,
+        theme === "dark" ? Math.random() * 0.6 + 0.28 : Math.random() * 0.4 + 0.18,
       twinkleSpeed: Math.random() * 0.6 + 0.15,
       twinklePhase: Math.random() * Math.PI * 2,
-      driftSpeed: Math.random() * 3 + 1.5,
+      driftSpeed: theme === "dark" ? Math.random() * 3 + 1.5 : Math.random() * 5 + 2.5,
       tint: tints[Math.floor(Math.random() * tints.length)],
     });
   }
-  return stars;
+  return particles;
 }
 
 export default function CosmicBackground() {
@@ -60,8 +67,10 @@ export default function CosmicBackground() {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Dark-mode stars drift down; light-mode motes rise, like dust in a sunbeam.
+    const verticalDirection = theme === "dark" ? 1 : -1;
 
-    let stars: Star[] = [];
+    let particles: Particle[] = [];
     let width = 0;
     let height = 0;
     let animationFrame = 0;
@@ -76,22 +85,24 @@ export default function CosmicBackground() {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      stars = createStars(width, height, theme);
+      particles = createParticles(width, height, theme);
     };
 
     const draw = (elapsedMs: number) => {
       ctx.clearRect(0, 0, width, height);
       const t = elapsedMs / 1000;
-      for (const star of stars) {
+      const span = height + 20;
+      for (const particle of particles) {
         const twinkle = reduceMotion
-          ? star.baseAlpha
-          : star.baseAlpha + Math.sin(t * star.twinkleSpeed + star.twinklePhase) * 0.22;
-        const y = reduceMotion
-          ? star.y
-          : (star.y + t * star.driftSpeed) % (height + 20);
+          ? particle.baseAlpha
+          : particle.baseAlpha + Math.sin(t * particle.twinkleSpeed + particle.twinklePhase) * 0.22;
+        const rawY = reduceMotion
+          ? particle.y
+          : particle.y + verticalDirection * t * particle.driftSpeed;
+        const y = ((rawY % span) + span) % span;
         ctx.beginPath();
-        ctx.arc(star.x, y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${star.tint}, ${Math.max(0, Math.min(1, twinkle))})`;
+        ctx.arc(particle.x, y, particle.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${particle.tint}, ${Math.max(0, Math.min(1, twinkle))})`;
         ctx.fill();
       }
     };
@@ -123,6 +134,10 @@ export default function CosmicBackground() {
 
   return (
     <div className={styles.cosmos} aria-hidden="true">
+      <div className={styles.sunRays} />
+      <div className={styles.sun} />
+      <div className={styles.cloudOne} />
+      <div className={styles.cloudTwo} />
       <div className={styles.glowOne} />
       <div className={styles.glowTwo} />
       <canvas ref={canvasRef} className={styles.canvas} />
