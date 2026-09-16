@@ -6,10 +6,12 @@
   background: radial-gradient(ellipse 120% 60% at 50% -10%, #14163a 0%, #05060b 55%, #05060b 100%);
 }
 
-/* Light mode isn't a paled-out night sky — it's the same cosmic zone
-   seen in daylight: a clear sky, the sun, and slow-drifting cloud wisps. */
+/* Light mode isn't a paled-out night sky — it's an up-close lunar
+   surface in bright, raking sunlight: craters, dust, and a soft vignette
+   like a macro shot of the ground underfoot. */
 [data-theme="light"] .cosmos {
-  background: radial-gradient(ellipse 120% 70% at 50% -14%, #cfe1fb 0%, #eaf1fb 46%, var(--bg) 100%);
+  background: radial-gradient(ellipse 140% 90% at 50% 50%, rgba(0, 0, 0, 0) 55%, rgba(28, 24, 18, 0.22) 100%),
+    linear-gradient(135deg, #f1ecdf 0%, #d3cab8 42%, #a89d8b 78%, #8c8271 100%);
 }
 
 .canvas {
@@ -78,152 +80,9 @@
   }
 }
 
-/* ---------------- Light mode: sun, rays, and clouds ---------------- */
-
-.sun,
-.sunRays,
-.cloudOne,
-.cloudTwo {
-  display: none;
-}
-
-[data-theme="light"] .sun,
-[data-theme="light"] .sunRays,
-[data-theme="light"] .cloudOne,
-[data-theme="light"] .cloudTwo {
-  display: block;
-  position: absolute;
-  pointer-events: none;
-}
-
-[data-theme="light"] .glowOne,
-[data-theme="light"] .glowTwo {
-  display: none;
-}
-
-[data-theme="light"] .sunRays {
-  top: -110px;
-  left: -70px;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  background: repeating-conic-gradient(
-    from 0deg,
-    rgba(255, 200, 120, 0.45) 0deg 2.5deg,
-    rgba(255, 200, 120, 0) 2.5deg 30deg
-  );
-  mask-image: radial-gradient(circle, transparent 34%, black 46%, black 68%, transparent 96%);
-  -webkit-mask-image: radial-gradient(circle, transparent 34%, black 46%, black 68%, transparent 96%);
-  animation: spinRays 140s linear infinite;
-}
-
-[data-theme="light"] .sun {
-  top: -60px;
-  left: -20px;
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 42% 38%,
-    #fffaf0 0%,
-    #ffe9b8 30%,
-    rgba(255, 210, 140, 0.7) 55%,
-    rgba(255, 210, 140, 0) 78%
-  );
-  box-shadow: 0 0 110px 36px rgba(255, 205, 140, 0.32);
-  animation: sunPulse 7s ease-in-out infinite;
-}
-
-[data-theme="light"] .cloudOne {
-  top: 18%;
-  right: -8%;
-  width: 40vw;
-  height: 120px;
-  max-width: 460px;
-  border-radius: 999px;
-  filter: blur(26px);
-  opacity: 0.65;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.15));
-  animation: driftCloudLeft 48s linear infinite;
-}
-
-[data-theme="light"] .cloudTwo {
-  top: 42%;
-  left: -12%;
-  width: 26vw;
-  height: 80px;
-  max-width: 320px;
-  border-radius: 999px;
-  filter: blur(20px);
-  opacity: 0.45;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.85));
-  animation: driftCloudRight 60s linear infinite;
-}
-
-@keyframes spinRays {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes sunPulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.92;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-}
-
-@keyframes driftCloudLeft {
-  from {
-    transform: translateX(6vw);
-  }
-  to {
-    transform: translateX(-14vw);
-  }
-}
-
-@keyframes driftCloudRight {
-  from {
-    transform: translateX(-4vw);
-  }
-  to {
-    transform: translateX(10vw);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .glowOne,
-  .glowTwo,
-  .sun,
-  .sunRays,
-  .cloudOne,
-  .cloudTwo {
+  .glowTwo {
     animation: none;
-  }
-}
-
-/* Tuck the sun further into the corner on narrow screens so its rays
-   don't sweep directly across the heading and pill text. */
-@media (max-width: 640px) {
-  [data-theme="light"] .sunRays {
-    top: -170px;
-    left: -150px;
-    width: 320px;
-    height: 320px;
-  }
-
-  [data-theme="light"] .sun {
-    top: -100px;
-    left: -80px;
-    width: 160px;
-    height: 160px;
   }
 }

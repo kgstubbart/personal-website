@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useTheme } from "../../theme/ThemeContext";
 import styles from "./CosmicBackground.module.css";
 
-type Particle = {
+type Star = {
   x: number;
   y: number;
   radius: number;
@@ -13,44 +13,112 @@ type Particle = {
   tint: string;
 };
 
+type Crater = {
+  x: number;
+  y: number;
+  radius: number;
+};
+
+type Glint = {
+  x: number;
+  y: number;
+  radius: number;
+  baseAlpha: number;
+  twinkleSpeed: number;
+  twinklePhase: number;
+};
+
 // Dark mode reads as a real night sky: dense, with a little color variety,
 // drifting gently downward.
-const DARK_DENSITY = 0.00034;
-const DARK_MAX_PARTICLES = 780;
-const DARK_TINTS = ["255,255,255", "255,255,255", "255,255,255", "214,224,255", "255,238,214"];
+const STAR_DENSITY = 0.00034;
+const MAX_STARS = 780;
+const STAR_TINTS = ["255,255,255", "255,255,255", "255,255,255", "214,224,255", "255,238,214"];
 
-// Light mode swaps stars for sunlit dust motes rising slowly through the
-// scene, like light catching particles in the air.
-const LIGHT_DENSITY = 0.00006;
-const LIGHT_MAX_PARTICLES = 110;
-const LIGHT_TINTS = ["255,236,196", "255,255,255", "255,224,168"];
-
-function createParticles(width: number, height: number, theme: "light" | "dark"): Particle[] {
-  const density = theme === "dark" ? DARK_DENSITY : LIGHT_DENSITY;
-  const maxParticles = theme === "dark" ? DARK_MAX_PARTICLES : LIGHT_MAX_PARTICLES;
-  const tints = theme === "dark" ? DARK_TINTS : LIGHT_TINTS;
-  const count = Math.min(maxParticles, Math.round(width * height * density));
-  const particles: Particle[] = [];
+function createStars(width: number, height: number): Star[] {
+  const count = Math.min(MAX_STARS, Math.round(width * height * STAR_DENSITY));
+  const stars: Star[] = [];
   for (let i = 0; i < count; i++) {
     const big = Math.random() > 0.88;
-    particles.push({
+    stars.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius:
-        theme === "dark"
-          ? big
-            ? Math.random() * 1.1 + 1
-            : Math.random() * 0.9 + 0.2
-          : Math.random() * 1.6 + 0.6,
-      baseAlpha:
-        theme === "dark" ? Math.random() * 0.6 + 0.28 : Math.random() * 0.4 + 0.18,
+      radius: big ? Math.random() * 1.1 + 1 : Math.random() * 0.9 + 0.2,
+      baseAlpha: Math.random() * 0.6 + 0.28,
       twinkleSpeed: Math.random() * 0.6 + 0.15,
       twinklePhase: Math.random() * Math.PI * 2,
-      driftSpeed: theme === "dark" ? Math.random() * 3 + 1.5 : Math.random() * 5 + 2.5,
-      tint: tints[Math.floor(Math.random() * tints.length)],
+      driftSpeed: Math.random() * 3 + 1.5,
+      tint: STAR_TINTS[Math.floor(Math.random() * STAR_TINTS.length)],
     });
   }
-  return particles;
+  return stars;
+}
+
+// Light mode: an up-close lunar surface. Craters are lit from a fixed
+// top-left "sun" so every shadow agrees, plus a scatter of tiny mineral
+// grains that catch the light — the moon's version of a star twinkling.
+const CRATER_DENSITY = 0.00022;
+const MAX_CRATERS = 220;
+const GLINT_DENSITY = 0.00006;
+const MAX_GLINTS = 110;
+
+function createCraters(width: number, height: number): Crater[] {
+  const count = Math.min(MAX_CRATERS, Math.round(width * height * CRATER_DENSITY));
+  const craters: Crater[] = [];
+  for (let i = 0; i < count; i++) {
+    const bias = Math.pow(Math.random(), 3.2); // mostly small pockmarks, rare large ones
+    craters.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: 3 + bias * 40,
+    });
+  }
+  // Largest first so small craters can overlap and read as sitting on top.
+  craters.sort((a, b) => b.radius - a.radius);
+  return craters;
+}
+
+function createGlints(width: number, height: number): Glint[] {
+  const count = Math.min(MAX_GLINTS, Math.round(width * height * GLINT_DENSITY));
+  const glints: Glint[] = [];
+  for (let i = 0; i < count; i++) {
+    glints.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.1 + 0.4,
+      baseAlpha: Math.random() * 0.4 + 0.25,
+      twinkleSpeed: Math.random() * 0.5 + 0.12,
+      twinklePhase: Math.random() * Math.PI * 2,
+    });
+  }
+  return glints;
+}
+
+function drawCrater(ctx: CanvasRenderingContext2D, crater: Crater) {
+  const { x, y, radius: r } = crater;
+  // No hard outline — a crisp circular edge reads as a sticker on top of
+  // the surface, not a pit in it. Two soft, feathered radial blobs (dark
+  // near the light source, bright on the far interior wall) fade to
+  // nothing at the rim, so pits blend into the surrounding terrain the
+  // way an unlit depression actually would.
+  const shadowCx = x - r * 0.22;
+  const shadowCy = y - r * 0.22;
+  const shadow = ctx.createRadialGradient(shadowCx, shadowCy, 0, shadowCx, shadowCy, r * 0.95);
+  shadow.addColorStop(0, "rgba(26,22,17,0.36)");
+  shadow.addColorStop(1, "rgba(26,22,17,0)");
+  ctx.fillStyle = shadow;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
+
+  const hiCx = x + r * 0.3;
+  const hiCy = y + r * 0.3;
+  const highlight = ctx.createRadialGradient(hiCx, hiCy, 0, hiCx, hiCy, r * 0.75);
+  highlight.addColorStop(0, "rgba(255,250,240,0.32)");
+  highlight.addColorStop(1, "rgba(255,250,240,0)");
+  ctx.fillStyle = highlight;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
 }
 
 export default function CosmicBackground() {
@@ -67,14 +135,15 @@ export default function CosmicBackground() {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    // Dark-mode stars drift down; light-mode motes rise, like dust in a sunbeam.
-    const verticalDirection = theme === "dark" ? 1 : -1;
 
-    let particles: Particle[] = [];
     let width = 0;
     let height = 0;
     let animationFrame = 0;
     let start = performance.now();
+
+    let stars: Star[] = [];
+    let craters: Crater[] = [];
+    let glints: Glint[] = [];
 
     const resize = () => {
       const rect = container.getBoundingClientRect();
@@ -85,26 +154,51 @@ export default function CosmicBackground() {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      particles = createParticles(width, height, theme);
+
+      if (theme === "dark") {
+        stars = createStars(width, height);
+      } else {
+        craters = createCraters(width, height);
+        glints = createGlints(width, height);
+      }
+    };
+
+    const drawDark = (elapsedMs: number) => {
+      const t = elapsedMs / 1000;
+      const span = height + 20;
+      for (const star of stars) {
+        const twinkle = reduceMotion
+          ? star.baseAlpha
+          : star.baseAlpha + Math.sin(t * star.twinkleSpeed + star.twinklePhase) * 0.22;
+        const y = reduceMotion ? star.y : ((star.y + t * star.driftSpeed) % span + span) % span;
+        ctx.beginPath();
+        ctx.arc(star.x, y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${star.tint}, ${Math.max(0, Math.min(1, twinkle))})`;
+        ctx.fill();
+      }
+    };
+
+    const drawLight = (elapsedMs: number) => {
+      const t = elapsedMs / 1000;
+      for (const crater of craters) drawCrater(ctx, crater);
+      for (const glint of glints) {
+        // A sharper curve than a star's twinkle: mostly dim, with a brief
+        // bright flash, like sunlight catching a grain of glassy regolith.
+        const wave = reduceMotion
+          ? 1
+          : Math.pow(Math.max(0, Math.sin(t * glint.twinkleSpeed + glint.twinklePhase)), 6);
+        const alpha = glint.baseAlpha * (reduceMotion ? 1 : 0.3 + wave * 0.9);
+        ctx.beginPath();
+        ctx.arc(glint.x, glint.y, glint.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,252,240, ${Math.max(0, Math.min(1, alpha))})`;
+        ctx.fill();
+      }
     };
 
     const draw = (elapsedMs: number) => {
       ctx.clearRect(0, 0, width, height);
-      const t = elapsedMs / 1000;
-      const span = height + 20;
-      for (const particle of particles) {
-        const twinkle = reduceMotion
-          ? particle.baseAlpha
-          : particle.baseAlpha + Math.sin(t * particle.twinkleSpeed + particle.twinklePhase) * 0.22;
-        const rawY = reduceMotion
-          ? particle.y
-          : particle.y + verticalDirection * t * particle.driftSpeed;
-        const y = ((rawY % span) + span) % span;
-        ctx.beginPath();
-        ctx.arc(particle.x, y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${particle.tint}, ${Math.max(0, Math.min(1, twinkle))})`;
-        ctx.fill();
-      }
+      if (theme === "dark") drawDark(elapsedMs);
+      else drawLight(elapsedMs);
     };
 
     resize();
@@ -134,12 +228,12 @@ export default function CosmicBackground() {
 
   return (
     <div className={styles.cosmos} aria-hidden="true">
-      <div className={styles.sunRays} />
-      <div className={styles.sun} />
-      <div className={styles.cloudOne} />
-      <div className={styles.cloudTwo} />
-      <div className={styles.glowOne} />
-      <div className={styles.glowTwo} />
+      {theme === "dark" && (
+        <>
+          <div className={styles.glowOne} />
+          <div className={styles.glowTwo} />
+        </>
+      )}
       <canvas ref={canvasRef} className={styles.canvas} />
       <div className={styles.vignette} />
     </div>
