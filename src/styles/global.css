@@ -101,6 +101,23 @@ button {
   }
 }
 
+/* Theme toggle: a circular reveal grown from the switch, driven manually
+   in ThemeToggle.tsx via document.documentElement.animate(). The default
+   cross-fade is disabled so only that custom clip-path animation plays. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(16px);

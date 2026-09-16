@@ -10,23 +10,37 @@ type Star = {
   twinkleSpeed: number;
   twinklePhase: number;
   driftSpeed: number;
+  tint: string;
 };
 
-const DENSITY = 0.00011; // stars per pixel, tuned for a sparse, sophisticated field
-const MAX_STARS = 340;
+// Dark mode reads as a real night sky: dense, with a little color variety.
+const DARK_DENSITY = 0.00034;
+const DARK_MAX_STARS = 780;
+const DARK_TINTS = ["255,255,255", "255,255,255", "255,255,255", "214,224,255", "255,238,214"];
 
-function createStars(width: number, height: number): Star[] {
-  const count = Math.min(MAX_STARS, Math.round(width * height * DENSITY));
+// Light mode reads as first light — a handful of stars still visible, not a field.
+const LIGHT_DENSITY = 0.00009;
+const LIGHT_MAX_STARS = 190;
+const LIGHT_TINTS = ["64,70,110"];
+
+function createStars(width: number, height: number, theme: "light" | "dark"): Star[] {
+  const density = theme === "dark" ? DARK_DENSITY : LIGHT_DENSITY;
+  const maxStars = theme === "dark" ? DARK_MAX_STARS : LIGHT_MAX_STARS;
+  const tints = theme === "dark" ? DARK_TINTS : LIGHT_TINTS;
+  const count = Math.min(maxStars, Math.round(width * height * density));
   const stars: Star[] = [];
   for (let i = 0; i < count; i++) {
+    const big = Math.random() > 0.88;
     stars.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius: Math.random() * 1.15 + 0.25,
-      baseAlpha: Math.random() * 0.55 + 0.25,
+      radius: big ? Math.random() * 1.1 + 1 : Math.random() * 0.9 + 0.2,
+      baseAlpha:
+        theme === "dark" ? Math.random() * 0.6 + 0.28 : Math.random() * 0.32 + 0.12,
       twinkleSpeed: Math.random() * 0.6 + 0.15,
       twinklePhase: Math.random() * Math.PI * 2,
       driftSpeed: Math.random() * 3 + 1.5,
+      tint: tints[Math.floor(Math.random() * tints.length)],
     });
   }
   return stars;
@@ -62,12 +76,8 @@ export default function CosmicBackground() {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      stars = createStars(width, height);
+      stars = createStars(width, height, theme);
     };
-
-    // Both themes render the cosmic zone on a dark backdrop; light mode gets
-    // a faint blue-white tint so the field reads as slightly softer.
-    const starColor = theme === "light" ? "226,229,255" : "255,255,255";
 
     const draw = (elapsedMs: number) => {
       ctx.clearRect(0, 0, width, height);
@@ -81,7 +91,7 @@ export default function CosmicBackground() {
           : (star.y + t * star.driftSpeed) % (height + 20);
         ctx.beginPath();
         ctx.arc(star.x, y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${starColor}, ${Math.max(0, Math.min(1, twinkle))})`;
+        ctx.fillStyle = `rgba(${star.tint}, ${Math.max(0, Math.min(1, twinkle))})`;
         ctx.fill();
       }
     };

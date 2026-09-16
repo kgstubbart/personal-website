@@ -23,18 +23,18 @@
 .card {
   padding: 1.35rem 1.4rem;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--cosmic-card-bg);
+  border: 1px solid var(--cosmic-card-border);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  transition: transform var(--transition-fast), border-color var(--transition-fast),
-    background-color var(--transition-fast);
+  transition: transform var(--transition-fast), border-color var(--transition-base),
+    background-color var(--transition-base);
 }
 
 .card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.24);
-  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--cosmic-card-border-hover);
+  background: var(--cosmic-card-bg-hover);
 }
 
 .iconWrap {
@@ -44,9 +44,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(154, 163, 255, 0.16);
-  color: #b9c0ff;
+  background: var(--cosmic-icon-bg);
+  color: var(--cosmic-icon-text);
   margin-bottom: 0.9rem;
+  transition: color var(--transition-base), background-color var(--transition-base);
 }
 
 .icon {
@@ -59,21 +60,24 @@
   font-size: 0.74rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #9ba0d4;
+  color: var(--cosmic-muted);
   margin-bottom: 0.35rem;
+  transition: color var(--transition-base);
 }
 
 .value {
   font-size: 1.02rem;
   font-weight: 600;
-  color: #f2f3fc;
+  color: var(--cosmic-heading);
   line-height: 1.35;
+  transition: color var(--transition-base);
 }
 
 .sub {
   margin-top: 0.2rem;
   font-size: 0.88rem;
-  color: #a7abd6;
+  color: var(--cosmic-muted);
+  transition: color var(--transition-base);
 }
 
 .tagRow {
@@ -88,7 +92,9 @@
   font-size: 0.74rem;
   padding: 0.2rem 0.5rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #dfe1fa;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: var(--cosmic-tag-bg);
+  color: var(--cosmic-tag-text);
+  border: 1px solid var(--cosmic-tag-border);
+  transition: color var(--transition-base), background-color var(--transition-base),
+    border-color var(--transition-base);
 }

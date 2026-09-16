@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <p className={styles.note}>
-          &copy; {year} {profile.name}. Built with React &amp; a lot of coffee.
+          &copy; {year} {profile.name}. Built with React &amp; a lot of hot chocolate.
         </p>
         <ul className={styles.links}>
           <li>

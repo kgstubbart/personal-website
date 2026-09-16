@@ -1,11 +1,69 @@
 .zone {
   position: relative;
   isolation: isolate;
-  color: #f2f3fc;
+  color: var(--cosmic-heading);
+
+  --cosmic-heading: #f5f6ff;
+  --cosmic-body: #cdd0ef;
+  --cosmic-muted: #a7abd6;
+
+  --cosmic-pill-bg: rgba(154, 163, 255, 0.1);
+  --cosmic-pill-border: rgba(154, 163, 255, 0.28);
+  --cosmic-pill-text: #b7bdf5;
+
+  --cosmic-card-bg: rgba(255, 255, 255, 0.06);
+  --cosmic-card-border: rgba(255, 255, 255, 0.12);
+  --cosmic-card-bg-hover: rgba(255, 255, 255, 0.09);
+  --cosmic-card-border-hover: rgba(255, 255, 255, 0.24);
+
+  --cosmic-icon-bg: rgba(154, 163, 255, 0.16);
+  --cosmic-icon-text: #b9c0ff;
+
+  --cosmic-tag-bg: rgba(255, 255, 255, 0.08);
+  --cosmic-tag-text: #dfe1fa;
+  --cosmic-tag-border: rgba(255, 255, 255, 0.14);
+
+  --cosmic-btn-primary-bg: #eef0ff;
+  --cosmic-btn-primary-bg-hover: #ffffff;
+  --cosmic-btn-primary-text: #191b2e;
+
+  --cosmic-btn-secondary-border: rgba(238, 240, 255, 0.28);
+  --cosmic-btn-secondary-border-hover: rgba(238, 240, 255, 0.6);
+  --cosmic-btn-secondary-bg-hover: rgba(238, 240, 255, 0.06);
+  --cosmic-btn-secondary-text: #eef0ff;
 }
 
+/* A dawn palette, not an inverted night sky: dark ink on pale sky, warm
+   accent for the primary action, soft frosted-glass cards. */
 [data-theme="light"] .zone {
-  color: #f4f5ff;
+  --cosmic-heading: #1a1d2e;
+  --cosmic-body: #40445e;
+  --cosmic-muted: #585c78;
+
+  --cosmic-pill-bg: rgba(67, 56, 202, 0.08);
+  --cosmic-pill-border: rgba(67, 56, 202, 0.22);
+  --cosmic-pill-text: #4338ca;
+
+  --cosmic-card-bg: rgba(255, 255, 255, 0.5);
+  --cosmic-card-border: rgba(30, 33, 56, 0.1);
+  --cosmic-card-bg-hover: rgba(255, 255, 255, 0.78);
+  --cosmic-card-border-hover: rgba(67, 56, 202, 0.3);
+
+  --cosmic-icon-bg: rgba(67, 56, 202, 0.1);
+  --cosmic-icon-text: #4338ca;
+
+  --cosmic-tag-bg: rgba(30, 33, 56, 0.06);
+  --cosmic-tag-text: #363a5c;
+  --cosmic-tag-border: rgba(30, 33, 56, 0.12);
+
+  --cosmic-btn-primary-bg: #4338ca;
+  --cosmic-btn-primary-bg-hover: #322aa1;
+  --cosmic-btn-primary-text: #ffffff;
+
+  --cosmic-btn-secondary-border: rgba(26, 29, 46, 0.22);
+  --cosmic-btn-secondary-border-hover: rgba(26, 29, 46, 0.45);
+  --cosmic-btn-secondary-bg-hover: rgba(26, 29, 46, 0.05);
+  --cosmic-btn-secondary-text: #1a1d2e;
 }
 
 .content {

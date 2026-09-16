@@ -107,6 +107,13 @@ export type ProjectEntry = {
 
 export const projects: ProjectEntry[] = [
   {
+    id: "exoplanet-atmosphere-analyzer",
+    name: "Exoplanet Atmosphere Analyzer",
+    description:
+      "A Python-based tool for analyzing exoplanet transmission spectra to characterize atmospheric composition — identifying common atmospheric gases and estimating planetary temperature directly from spectroscopic data.",
+    tech: ["Python"],
+  },
+  {
     id: "networks-of-power-and-poverty",
     name: "Networks of Power and Poverty",
     description:
@@ -121,20 +128,6 @@ export const projects: ProjectEntry[] = [
     description:
       "An AWS-hosted web application that lets users favorite books, contributing to a community-driven ranking of the most-loved titles. Visitors can browse book details and discover popular reads based on collective favorites, powered by the Google Books API.",
     tech: ["React", "JavaScript", "HTML", "CSS", "MySQL", "AWS", "Google Books API"],
-  },
-  {
-    id: "chess-server",
-    name: "Chess Server",
-    description:
-      "A fully functional chess server supporting real-time play — one of the larger full-stack systems I've built, covering game logic, persistence, and client-server communication end to end.",
-    tech: [],
-  },
-  {
-    id: "exoplanet-atmosphere-analyzer",
-    name: "Exoplanet Atmosphere Analyzer",
-    description:
-      "A Python-based tool for analyzing exoplanet transmission spectra to characterize atmospheric composition — identifying common atmospheric gases and estimating planetary temperature directly from spectroscopic data.",
-    tech: ["Python"],
   },
 ];
 

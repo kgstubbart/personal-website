@@ -6,8 +6,15 @@
   background: radial-gradient(ellipse 120% 60% at 50% -10%, #14163a 0%, #05060b 55%, #05060b 100%);
 }
 
+/* Light mode reads as first light breaking over a night sky, not an
+   inverted dark theme — a pale dawn gradient with a warm horizon. */
 [data-theme="light"] .cosmos {
-  background: radial-gradient(ellipse 120% 60% at 50% -10%, #2a2f66 0%, #12142c 55%, #12142c 100%);
+  background: radial-gradient(
+      ellipse 85% 55% at 50% 60%,
+      rgba(255, 205, 160, 0.5) 0%,
+      rgba(255, 205, 160, 0) 65%
+    ),
+    radial-gradient(ellipse 120% 65% at 50% -10%, #dbe1fa 0%, #eef1fb 48%, var(--bg) 100%);
 }
 
 .canvas {
@@ -52,6 +59,16 @@
   right: -10%;
   background: radial-gradient(circle, rgba(94, 234, 212, 0.4) 0%, rgba(94, 234, 212, 0) 70%);
   animation: driftTwo 26s ease-in-out infinite;
+}
+
+[data-theme="light"] .glowOne {
+  opacity: 0.55;
+  background: radial-gradient(circle, rgba(255, 187, 128, 0.55) 0%, rgba(255, 187, 128, 0) 70%);
+}
+
+[data-theme="light"] .glowTwo {
+  opacity: 0.4;
+  background: radial-gradient(circle, rgba(112, 130, 255, 0.35) 0%, rgba(112, 130, 255, 0) 70%);
 }
 
 @keyframes driftOne {

@@ -11,7 +11,7 @@ export default function Projects() {
     <>
       <Seo
         title="Projects"
-        description="Projects by Kason Stubbart, including Library Ace, a chess server, and research tooling for modeling networks of power and poverty."
+        description="Projects by Kason Stubbart, including an exoplanet atmosphere analyzer, Library Ace, and research tooling for modeling networks of power and poverty."
       />
 
       <PageIntro
