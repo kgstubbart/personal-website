@@ -151,16 +151,19 @@
   }
 
   .mobilePanel {
-    /* Longhand instead of the `inset` shorthand, plus an explicit
-       z-index, so this reliably fills the viewport below the nav on
-       every browser rather than depending on shorthand support or
-       inheriting stacking from an ancestor. */
+    /* Rendered via a portal straight into <body> (see Nav.tsx) — the
+       header has backdrop-filter, which establishes a new containing
+       block for any position:fixed descendant, so this panel was being
+       positioned relative to the ~72px-tall header instead of the
+       viewport. Being a portal, it's now a sibling of the header in the
+       root stacking context, so it needs a z-index above the header's
+       (100) to actually paint on top of it. */
     position: fixed;
     top: var(--nav-height);
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 90;
+    z-index: 150;
     display: flex;
     flex-direction: column;
     background: var(--bg);

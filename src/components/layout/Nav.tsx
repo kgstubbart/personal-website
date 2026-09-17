@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { NavLink, useLocation } from "react-router-dom";
 import ThemeToggle from "../shared/ThemeToggle";
 import styles from "./Nav.module.css";
@@ -106,45 +107,47 @@ export default function Nav() {
         </div>
       </div>
 
-      {menuOpen && (
-        <div id="mobile-nav-panel" className={styles.mobilePanel}>
-          <nav aria-label="Mobile">
-            <ul className={styles.mobileLinks}>
-              {NAV_ITEMS.map((item) => (
-                <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    end={item.to === "/"}
-                    className={linkClass}
-                  >
-                    {item.label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <a
-            className={styles.mobileResumeBtn}
-            href="/KasonStubbartSE.pdf"
-            download="KasonStubbartSE.pdf"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
+      {menuOpen &&
+        createPortal(
+          <div id="mobile-nav-panel" className={styles.mobilePanel}>
+            <nav aria-label="Mobile">
+              <ul className={styles.mobileLinks}>
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.to}>
+                    <NavLink
+                      to={item.to}
+                      end={item.to === "/"}
+                      className={linkClass}
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <a
+              className={styles.mobileResumeBtn}
+              href="/KasonStubbartSE.pdf"
+              download="KasonStubbartSE.pdf"
             >
-              <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" />
-            </svg>
-            Download resume
-          </a>
-        </div>
-      )}
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" />
+              </svg>
+              Download resume
+            </a>
+          </div>,
+          document.body,
+        )}
     </header>
   );
 }
