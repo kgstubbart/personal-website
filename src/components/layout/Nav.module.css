@@ -81,6 +81,34 @@
   gap: 0.6rem;
 }
 
+.resumeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 38px;
+  padding: 0 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: border-color var(--transition-fast), color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.resumeBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.resumeIcon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
 .menuButton {
   display: none;
   width: 38px;
@@ -110,6 +138,16 @@
 
   .menuButton {
     display: inline-flex;
+  }
+
+  .resumeBtn {
+    width: 38px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .resumeLabel {
+    display: none;
   }
 
   .mobilePanel {

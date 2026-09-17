@@ -112,6 +112,7 @@ export const projects: ProjectEntry[] = [
     description:
       "A Python-based tool for analyzing exoplanet transmission spectra to characterize atmospheric composition — identifying common atmospheric gases and estimating planetary temperature directly from spectroscopic data.",
     tech: ["Python"],
+    link: "https://github.com/kgstubbart/exoplanet-atmosphere-analyzer",
   },
   {
     id: "networks-of-power-and-poverty",
@@ -121,6 +122,7 @@ export const projects: ProjectEntry[] = [
     role: "Research Assistant — design, simulation, and visualization",
     tech: ["Python", "Algorithm Design", "Data Visualization"],
     dates: "Aug 2024 – Present",
+    link: "https://github.com/kgstubbart/networks-of-power-and-poverty",
   },
   {
     id: "library-ace",
@@ -128,6 +130,7 @@ export const projects: ProjectEntry[] = [
     description:
       "An AWS-hosted web application that lets users favorite books, contributing to a community-driven ranking of the most-loved titles. Visitors can browse book details and discover popular reads based on collective favorites, powered by the Google Books API.",
     tech: ["React", "JavaScript", "HTML", "CSS", "MySQL", "AWS", "Google Books API"],
+    link: "https://github.com/kgstubbart/library-ace",
   },
 ];
 

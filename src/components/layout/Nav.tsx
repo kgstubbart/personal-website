@@ -58,6 +58,26 @@ export default function Nav() {
         </nav>
 
         <div className={styles.actions}>
+          <a
+            className={styles.resumeBtn}
+            href="/resume.pdf"
+            download="Kason-Stubbart-Resume.pdf"
+            aria-label="Download resume (PDF)"
+          >
+            <svg
+              className={styles.resumeIcon}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" />
+            </svg>
+            <span className={styles.resumeLabel}>Resume</span>
+          </a>
           <ThemeToggle />
           <button
             type="button"

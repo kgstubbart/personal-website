@@ -44,7 +44,7 @@ export default function Interests() {
 
       <PageIntro
         eyebrow="Off the clock"
-        title="A bit more about me"
+        title="Beyond the Resume"
         lede="Software is a big part of what I do, but not all of it. Here's what fills the rest of my time."
       />
 

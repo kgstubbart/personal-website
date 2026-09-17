@@ -5,11 +5,21 @@ type CardProps = {
   children: ReactNode;
   className?: string;
   interactive?: boolean;
+  href?: string;
 };
 
-export default function Card({ children, className = "", interactive = false }: CardProps) {
-  const classes = [styles.card, interactive ? styles.interactive : "", className]
+export default function Card({ children, className = "", interactive = false, href }: CardProps) {
+  const classes = [styles.card, interactive || href ? styles.interactive : "", className]
     .filter(Boolean)
     .join(" ");
+
+  if (href) {
+    return (
+      <a className={classes} href={href} target="_blank" rel="noreferrer">
+        {children}
+      </a>
+    );
+  }
+
   return <div className={classes}>{children}</div>;
 }

@@ -16,7 +16,7 @@ export default function Projects() {
 
       <PageIntro
         eyebrow="Selected work"
-        title="Things I've built"
+        title="Featured Builds"
         lede="A mix of research tooling, full-stack applications, and side projects — spanning simulation, web development, and data analysis."
       />
 
@@ -24,19 +24,14 @@ export default function Projects() {
         <div className={styles.list}>
           {projects.map((project, index) => (
             <Reveal key={project.id} delay={index * 60}>
-              <Card className={styles.card}>
+              <Card className={styles.card} href={project.link}>
                 <div className={styles.header}>
                   <h2 className={styles.name}>{project.name}</h2>
                   <div className={styles.headerMeta}>
                     {project.dates && <span className={styles.dates}>{project.dates}</span>}
                     {project.link && (
-                      <a
-                        className={styles.link}
-                        href={project.link}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {project.linkLabel ?? "View project"}
+                      <span className={styles.link}>
+                        {project.linkLabel ?? "View on GitHub"}
                         <svg
                           width="14"
                           height="14"
@@ -50,7 +45,7 @@ export default function Projects() {
                         >
                           <path d="M7 17 17 7M7 7h10v10" />
                         </svg>
-                      </a>
+                      </span>
                     )}
                   </div>
                 </div>

@@ -38,7 +38,7 @@ export default function Home() {
           <div className={styles.projectGrid}>
             {featuredProjects.map((project, index) => (
               <Reveal key={project.id} delay={index * 80}>
-                <Card interactive className={styles.projectCard}>
+                <Card interactive className={styles.projectCard} href={project.link}>
                   <h3 className={styles.projectName}>{project.name}</h3>
                   <p className={styles.projectDesc}>{project.description}</p>
                   {project.tech.length > 0 && (

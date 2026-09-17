@@ -15,7 +15,7 @@ export default function Experience() {
 
       <PageIntro
         eyebrow="Career"
-        title="Where I've worked"
+        title="Professional Background"
         lede="From research tooling to instructional design leadership — a look at the roles that have shaped how I build and lead."
       />
 

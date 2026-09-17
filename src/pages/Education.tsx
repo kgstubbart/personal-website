@@ -15,8 +15,8 @@ export default function Education() {
       />
 
       <PageIntro
-        eyebrow="Background"
-        title="Education"
+        eyebrow="Credentials"
+        title="Academic Background"
         lede="A Computer Science degree with an Astronomy minor — pairing rigorous engineering fundamentals with a curiosity about what's beyond the code."
       />
 
