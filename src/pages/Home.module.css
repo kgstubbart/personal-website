@@ -113,6 +113,12 @@
   flex: 1;
 }
 
+.splitMeta {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
 .splitLink {
   font-weight: 600;
   font-size: 0.92rem;

@@ -96,6 +96,9 @@ export default function Home() {
                 <p className={styles.splitBody}>
                   {education[0].degree}, {education[0].org} · {education[0].note}
                 </p>
+                <p className={styles.splitMeta}>
+                  {education[0].start} – {education[0].end}
+                </p>
                 <Link to="/education" className={styles.splitLink}>
                   See education & honors →
                 </Link>
