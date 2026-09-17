@@ -38,34 +38,34 @@
 }
 
 /* A dawn palette, not an inverted night sky: dark ink on pale sky, warm
-   accent for the primary action, soft frosted-glass cards. */
+   accent for the primary action. Cards read as solid, opaque surfaces —
+   the photo behind them is busy enough that a "frosted glass" look
+   (previously ~60% opacity) left text hard to read, so these are now
+   nearly solid white, the same as the plain page cards elsewhere. */
 [data-theme="light"] .zone {
   --cosmic-heading: #1a1d2e;
   --cosmic-body: #40445e;
   --cosmic-muted: #585c78;
 
-  --cosmic-pill-bg: rgba(67, 56, 202, 0.08);
-  --cosmic-pill-border: rgba(67, 56, 202, 0.22);
+  --cosmic-pill-bg: rgba(255, 255, 255, 0.9);
+  --cosmic-pill-border: rgba(67, 56, 202, 0.25);
   --cosmic-pill-text: #4338ca;
 
-  --cosmic-card-bg: rgba(255, 255, 255, 0.6);
-  --cosmic-card-border: rgba(30, 33, 56, 0.1);
-  --cosmic-card-bg-hover: rgba(255, 255, 255, 0.82);
-  --cosmic-card-border-hover: rgba(67, 56, 202, 0.3);
+  --cosmic-card-bg: rgba(255, 255, 255, 0.94);
+  --cosmic-card-border: rgba(30, 33, 56, 0.12);
+  --cosmic-card-bg-hover: #ffffff;
+  --cosmic-card-border-hover: rgba(67, 56, 202, 0.35);
 
-  /* The hero text sits directly over a real photo, not a gentle gradient,
-     so it needs a frosted panel behind it for contrast — the same glass
-     treatment as the info cards, just larger. */
-  --cosmic-panel-bg: rgba(255, 253, 247, 0.62);
-  --cosmic-panel-border: rgba(30, 33, 56, 0.08);
+  --cosmic-panel-bg: rgba(255, 253, 247, 0.94);
+  --cosmic-panel-border: rgba(30, 33, 56, 0.1);
   --cosmic-panel-blur: blur(28px);
 
-  --cosmic-icon-bg: rgba(67, 56, 202, 0.1);
+  --cosmic-icon-bg: rgba(67, 56, 202, 0.12);
   --cosmic-icon-text: #4338ca;
 
-  --cosmic-tag-bg: rgba(30, 33, 56, 0.06);
+  --cosmic-tag-bg: rgba(255, 255, 255, 0.75);
   --cosmic-tag-text: #363a5c;
-  --cosmic-tag-border: rgba(30, 33, 56, 0.12);
+  --cosmic-tag-border: rgba(30, 33, 56, 0.15);
 
   --cosmic-btn-primary-bg: #4338ca;
   --cosmic-btn-primary-bg-hover: #322aa1;
