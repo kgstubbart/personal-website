@@ -1,8 +1,9 @@
-import { profile, skills } from "../../data/resume";
+import { education, profile, skills } from "../../data/resume";
 import Reveal from "../shared/Reveal";
 import styles from "./InfoCards.module.css";
 
 const coreStack = [...skills.languages.slice(0, 3), "React", "AWS"];
+const degree = education[0];
 
 const CARDS = [
   {
@@ -19,6 +20,7 @@ const CARDS = [
     label: "Education",
     value: profile.education,
     sub: profile.minor,
+    meta: `${degree.start} – ${degree.end}`,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
         <path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z" />
@@ -61,6 +63,7 @@ export default function InfoCards() {
             <p className={styles.label}>{card.label}</p>
             <p className={styles.value}>{card.value}</p>
             {card.sub && <p className={styles.sub}>{card.sub}</p>}
+            {card.meta && <p className={styles.meta}>{card.meta}</p>}
             {card.tags && (
               <div className={styles.tagRow}>
                 {card.tags.map((tag) => (

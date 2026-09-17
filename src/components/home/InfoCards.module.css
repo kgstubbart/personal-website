@@ -80,6 +80,14 @@
   transition: color var(--transition-base);
 }
 
+.meta {
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--cosmic-muted);
+  transition: color var(--transition-base);
+}
+
 .tagRow {
   display: flex;
   flex-wrap: wrap;
