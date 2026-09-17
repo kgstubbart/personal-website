@@ -1,7 +1,9 @@
 :root {
-  --font-sans: "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Manrope", "Manrope Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Space Grotesk", "Space Grotesk Fallback", var(--font-sans);
-  --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, "SFMono-Regular", Menlo,
+  /* Space Mono was commissioned by Google Fonts as Space Grotesk's
+     companion monospace — designed as a matched pair. */
+  --font-mono: "Space Mono", "Space Mono Fallback", ui-monospace, "SFMono-Regular", Menlo,
     Consolas, monospace;
 
   --radius-sm: 8px;

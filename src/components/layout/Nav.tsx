@@ -60,8 +60,8 @@ export default function Nav() {
         <div className={styles.actions}>
           <a
             className={styles.resumeBtn}
-            href="/resume.pdf"
-            download="Kason-Stubbart-Resume.pdf"
+            href="/KasonStubbartSE.pdf"
+            download="KasonStubbartSE.pdf"
             aria-label="Download resume (PDF)"
           >
             <svg
