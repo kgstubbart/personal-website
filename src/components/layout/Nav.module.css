@@ -151,33 +151,63 @@
   }
 
   .mobilePanel {
+    /* Longhand instead of the `inset` shorthand, plus an explicit
+       z-index, so this reliably fills the viewport below the nav on
+       every browser rather than depending on shorthand support or
+       inheriting stacking from an ancestor. */
     position: fixed;
-    inset: var(--nav-height) 0 0 0;
+    top: var(--nav-height);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
     background: var(--bg);
-    padding: 1rem 1.25rem 2rem;
+    padding: 1.5rem 1.5rem calc(env(safe-area-inset-bottom, 0px) + 2rem);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     animation: slideDown var(--transition-base);
   }
 
   .mobileLinks {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+  }
+
+  .mobileLinks li + li {
+    border-top: 1px solid var(--surface-border);
   }
 
   .mobileLinks .link {
-    padding: 0.85rem 1rem;
-    font-size: 1.05rem;
-    border-radius: var(--radius-sm);
+    padding: 1.15rem 0.25rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 0;
   }
 
   .mobileLinks .linkActive::after {
-    left: 1rem;
+    left: 0.25rem;
     right: auto;
     bottom: 50%;
     transform: translateY(50%);
     width: 3px;
     height: 60%;
+  }
+
+  .mobileResumeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 600;
   }
 }
 
